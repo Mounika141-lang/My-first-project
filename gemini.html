@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mounika's Portfolio</title>
+    
+    <style>
+        :root {
+            --primary-color: #e74c3c; /* Red */
+            --secondary-color: #34495e; /* Dark Blue */
+            --accent-color: #f1c40f; /* Yellow */
+            --text-color: #333;
+            --background-color: #ecf0f1; /* Light Gray */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Container */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-color);
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        #hero h1 {
+            font-size: 3em;
+            margin-bottom: 5px;
+        }
+
+        #hero p {
+            font-size: 1.2em;
+        }
+
+        /* Section Headings */
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Skills Section */
+        #skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #skills li {
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Projects Section */
+        .project-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            text-align: left;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .project-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        #contact ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        #contact li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary-color);
+            color: #fff;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="hero">
+        <h1>Hello, I'm Mounika! 👋</h1>
+        <p>A passionate **[Your Field, e.g., Software Developer]** focused on building innovative and efficient solutions.</p>
+    </section>
+
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <p>
+            I am a **[e.g., detail-oriented, creative, problem-solver]** with a background in **[Your Educational Background/Major]**. I thrive on transforming complex problems into simple, user-friendly applications. My journey in **[Your Industry]** is driven by a curiosity for new technologies and a commitment to continuous learning and improvement. I am always looking for opportunities to contribute to impactful projects.
+        </p>
+    </section>
+
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML5 & CSS3</li>
+            <li>JavaScript (ES6+)</li>
+            <li>**[Framework/Library 1, e.g., React, Angular]**</li>
+            <li>**[Backend Language, e.g., Python, Node.js]**</li>
+            <li>Database (e.g., SQL, MongoDB)</li>
+            <li>Git & GitHub</li>
+            <li>**[Soft Skill, e.g., Problem Solving]**</li>
+        </ul>
+    </section>
+
+    <section id="projects" class="container">
+        <h2>Projects</h2>
+        <div id="project-list">
+            </div>
+        <p style="text-align: center; margin-top: 20px;">
+            Check out more on my <a href="[Your GitHub Profile Link]" style="color: var(--primary-color); text-decoration: none;">GitHub profile</a>.
+        </p>
+    </section>
+
+    <section id="contact" class="container">
+        <h2>Contact</h2>
+        <p>I am currently open to new opportunities. Let's connect!</p>
+        <ul>
+            <li>📧 **Email:** <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+            <li>🔗 **LinkedIn:** <a href="[Your LinkedIn Link]" target="_blank">linkedin.com/in/mounika</a></li>
+            <li>💻 **GitHub:** <a href="[Your GitHub Link]" target="_blank">github.com/mounika</a></li>
+            <li id="status-message" style="margin-top: 20px; font-weight: bold; color: var(--primary-color);"></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Mounika. Built with passion and code.</p>
+    </footer>
+
+    <script>
+        // Project Data Array
+        const projects = [
+            { 
+                title: "Personal Finance Tracker", 
+                description: "Built a web application using **[Language/Framework]** to track income and expenses with visual charts.",
+                link: "#" 
+            },
+            { 
+                title: "Recipe Generator API", 
+                description: "Developed a backend API using **[Backend Tech]** that serves recipes based on user-input ingredients.",
+                link: "#"
+            },
+            { 
+                title: "Portfolio V1", 
+                description: "The initial responsive design of my portfolio, focusing on clean UI/UX principles.",
+                link: "#"
+            }
+        ];
+
+        // Function to dynamically load project cards
+        function loadProjects() {
+            const projectList = document.getElementById('project-list');
+            
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                
+                card.innerHTML = `
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <a href="${project.link}" target="_blank">View Details &rarr;</a>
+                `;
+                
+                projectList.appendChild(card);
+            });
+        }
+
+        // Function to set dynamic content (e.g., current year, status message)
+        function setDynamicContent() {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Set a simple status message in the contact section
+            const statusElement = document.getElementById('status-message');
+            const hour = new Date().getHours();
+            let greeting;
+
+            if (hour < 12) {
+                greeting = "✨ Currently active: Let's discuss a project!";
+            } else {
+                greeting = "💡 Open to chat! Send an email anytime.";
+            }
+            statusElement.textContent = greeting;
+        }
+
+        // Run functions when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+            setDynamicContent();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game with Learning - Educational Games & Rhymes for Kids</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #FF6B8B;
+            --secondary: #6A89CC;
+            --accent: #FF9F43;
+            --light: #FFF9F2;
+            --dark: #2C3A47;
+            --success: #1DD1A1;
+            --warning: #FECA57;
+            --kid-blue: #48DBFB;
+            --kid-pink: #FF9FF3;
+            --kid-green: #54E346;
+            --kid-yellow: #FFEAA7;
+            --kid-purple: #A29BFE;
+            --kid-orange: #FFAF40;
+            --kid-teal: #00CEC9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #FFEAA7, #81ECEC);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h2 {
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.4);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(45deg, var(--kid-teal), var(--kid-blue));
+        }
+        
+        .btn-accent:hover {
+            box-shadow: 0 6px 20px rgba(0, 206, 201, 0.4);
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 12px;
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--kid-purple), var(--kid-blue));
+            color: white;
+            padding: 180px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="50" fill="rgba(255,255,255,0.1)"/><circle cx="800" cy="300" r="80" fill="rgba(255,255,255,0.1)"/><circle cx="400" cy="600" r="60" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+        
+        .hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            -webkit-text-fill-color: white;
+            background: none;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* Games Section */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(255, 107, 139, 0.2);
+        }
+        
+        .game-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1));
+        }
+        
+        .game-content {
+            padding: 25px;
+        }
+        
+        .game-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background: linear-gradient(45deg, var(--kid-teal), var(--kid-blue));
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Rhymes Section */
+        .rhymes-section {
+            background: linear-gradient(135deg, var(--light), #E8F6F3);
+            position: relative;
+        }
+        
+        .rhymes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .rhyme-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .rhyme-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--kid-purple);
+            box-shadow: 0 15px 40px rgba(162, 155, 254, 0.2);
+        }
+        
+        .rhyme-header {
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rhyme-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--kid-purple), var(--kid-blue));
+        }
+        
+        .rhyme-header h3,
+        .rhyme-header .rhyme-lang {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .rhyme-lang {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .rhyme-content {
+            padding: 25px;
+        }
+        
+        .rhyme-text {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .rhyme-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .play-btn {
+            background: linear-gradient(45deg, var(--success), var(--kid-green));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(29, 209, 161, 0.3);
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(29, 209, 161, 0.4);
+        }
+        
+        .play-btn.playing {
+            background: linear-gradient(45deg, var(--accent), var(--kid-orange));
+        }
+        
+        .rhyme-audio {
+            display: none;
+        }
+        
+        /* Auth Section */
+        .auth-section {
+            background: linear-gradient(135deg, var(--kid-yellow), var(--kid-pink));
+        }
+        
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .auth-form {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 35px;
+            width: 100%;
+            max-width: 400px;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-form:hover {
+            border-color: var(--primary);
+        }
+        
+        .auth-form h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 139, 0.1);
+            outline: none;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--kid-blue), var(--kid-teal));
+            color: white;
+        }
+        
+        .contact-section h2 {
+            color: white;
+        }
+        
+        .contact-section h2::after {
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-item i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1A1A2E);
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            color: white;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            -webkit-text-fill-color: white;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 20px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--kid-teal);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .auth-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* New Game Styles */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .memory-card {
+            height: 100px;
+            background: linear-gradient(45deg, var(--kid-blue), var(--kid-teal));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .memory-card.flipped {
+            background: white;
+            color: var(--dark);
+            transform: rotateY(180deg);
+        }
+        
+        .memory-card.matched {
+            background: linear-gradient(45deg, var(--success), var(--kid-green));
+            cursor: default;
+        }
+        
+        .puzzle-game {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .puzzle-piece {
+            height: 80px;
+            background: linear-gradient(45deg, var(--kid-pink), var(--kid-purple));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .puzzle-piece.empty {
+            background: #e9ecef;
+            cursor: default;
+        }
+        
+        .word-search {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 5px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .word-search-cell {
+            height: 40px;
+            background: white;
+            border: 2px solid var(--kid-blue);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .word-search-cell.selected {
+            background: linear-gradient(45deg, var(--kid-yellow), var(--kid-orange));
+            color: white;
+        }
+        
+        .word-search-cell.found {
+            background: linear-gradient(45deg, var(--success), var(--kid-green));
+            color: white;
+        }
+        
+        .quiz-game {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .quiz-option {
+            padding: 15px;
+            background: linear-gradient(45deg, var(--kid-blue), var(--kid-teal));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Game Selection */
+        .game-selection {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .game-type-btn {
+            padding: 12px 20px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .game-type-btn.active {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.3);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            width: 95%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 3px solid var(--primary);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark);
+            background: none;
+            border: none;
+            z-index: 2001;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        .score-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 25px 0;
+            color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            background: rgba(255, 107, 139, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        /* Rhyme Player Styles */
+        .rhyme-player {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .rhyme-status {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-top: 10px;
+            min-height: 25px;
+            font-weight: 600;
+            padding: 8px 15px;
+            background: rgba(255, 107, 139, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .audio-progress {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .audio-progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, var(--success), var(--kid-green));
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .audio-time {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        /* Animation for buttons */
+        @keyframes bounce {
+            0%, 20%, 60%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            80% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .bounce:hover {
+            animation: bounce 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-star"></i>
+                    Learn & Play Fun
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#rhymes">Rhymes</a></li>
+                    <li><a href="#auth">Sign Up/In</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Learn & Play Fun</h1>
+            <p>Where education meets excitement! Discover interactive games and delightful rhymes in English and Telugu for young learners.</p>
+            <a href="#games" class="btn btn-accent bounce">Start Playing</a>
+            <a href="#rhymes" class="btn bounce" style="margin-left: 15px;">Enjoy Rhymes</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Learn & Play Fun</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to Learn & Play Fun - the ultimate educational playground where children embark on exciting learning adventures! Our platform combines the joy of gaming with the power of education.</p>
+                    <p>We believe that learning should be an adventure, not a chore. That's why we've created a vibrant world where kids can explore numbers, letters, and words across English and Telugu languages.</p>
+                    <p>With colorful animations, engaging activities, and delightful rhymes, children develop essential skills while having endless fun. Our adaptive learning system grows with your child, ensuring continuous challenge and achievement.</p>
+                </div>
+                <div class="about-image">
+                    <div style="background: linear-gradient(45deg, var(--kid-purple), var(--kid-blue)); height: 320px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.6rem; padding: 20px; text-align: center;">
+                        <i class="fas fa-graduation-cap" style="font-size: 4rem; margin-right: 20px;"></i>
+                        Learning Made Magical!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games">
+        <div class="container">
+            <h2>Educational Games</h2>
+            <div class="games-grid">
+                <!-- Number Games -->
+                <div class="game-card" data-game="numbers">
+                    <div class="game-image" style="background: linear-gradient(45deg, var(--kid-blue), var(--kid-teal));">
+                        <i class="fas fa-sort-numeric-up" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="game-content">
+                        <h3>Number Adventures</h3>
+                        <p>Embark on a numerical journey! Master counting and number recognition in English and Telugu through exciting challenges.</p>
+                        <div class="game-tags">
+                            <span class="tag">Counting</span>
+                            <span class="tag">Bilingual</span>
+                            <span class="tag">Fun Math</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Word Games -->
+                <div class="game-card" data-game="words">
+                    <div class="game-image" style="background: linear-gradient(45deg, var(--kid-pink), var(--kid-purple));">
+                        <i class="fas fa-font" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="game-content">
+                        <h3>Word World</h3>
+                        <p>Dive into the magical world of words! Build vocabulary and discover new words in English and Telugu through interactive puzzles.</p>
+                        <div class="game-tags">
+                            <span class="tag">Vocabulary</span>
+                            <span class="tag">Word Games</span>
+                            <span class="tag">Bilingual</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Memory Games -->
+                <div class="game-card" data-game="memory">
+                    <div class="game-image" style="background: linear-gradient(45deg, var(--kid-green), var(--success));">
+                        <i class="fas fa-brain" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="game-content">
+                        <h3>Memory Match</h3>
+                        <p>Test your memory skills! Match pairs of letters, numbers, and words while improving concentration and cognitive skills.</p>
+                        <div class="game-tags">
+                            <span class="tag">Memory</span>
+                            <span class="tag">Concentration</span>
+                            <span class="tag">Fun</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Puzzle Games -->
+                <div class="game-card" data-game="puzzle">
+                    <div class="game-image" style="background: linear-gradient(45deg, var(--kid-orange), var(--accent));">
+                        <i class="fas fa-puzzle-piece" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="game-content">
+                        <h3>Puzzle Challenge</h3>
+                        <p>Solve exciting puzzles! Arrange pieces to form words, numbers, and pictures while developing problem-solving skills.</p>
+                        <div class="game-tags">
+                            <span class="tag">Puzzles</span>
+                            <span class="tag">Logic</span>
+                            <span class="tag">Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Games -->
+                <div class="game-card" data-game="quiz">
+                    <div class="game-image" style="background: linear-gradient(45deg, var(--kid-yellow), var(--warning));">
+                        <i class="fas fa-question-circle" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="game-content">
+                        <h3>Knowledge Quiz</h3>
+                        <p>Test your knowledge! Answer fun questions about numbers, letters, and words in an engaging quiz format.</p>
+                        <div class="game-tags">
+                            <span class="tag">Quiz</span>
+                            <span class="tag">Knowledge</span>
+                            <span class="tag">Learning</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Word Search -->
+                <div class="game-card" data-game="wordsearch">
+                    <div class="game-image" style="background: linear-gradient(45deg, #FF6B8B, #FF9F43);">
+                        <i class="fas fa-search" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="game-content">
+                        <h3>Word Search</h3>
+                        <p>Find hidden words! Search for vocabulary words in a grid and improve your observation and spelling skills.</p>
+                        <div class="game-tags">
+                            <span class="tag">Word Search</span>
+                            <span class="tag">Observation</span>
+                            <span class="tag">Spelling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rhymes Section -->
+    <section id="rhymes" class="rhymes-section">
+        <div class="container">
+            <h2>Musical Rhymes Collection</h2>
+            <div class="rhymes-container">
+                <!-- English Rhymes -->
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>Twinkle Twinkle Little Star</h3>
+                        <span class="rhyme-lang">English</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            Twinkle, twinkle, little star,<br>
+                            How I wonder what you are!<br>
+                            Up above the world so high,<br>
+                            Like a diamond in the sky.
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="twinkle">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="twinkle-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="twinkle-current">0:00</span>
+                                <span id="twinkle-duration">1:30</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="twinkle-status">Ready to play!</div>
+                    </div>
+                </div>
+                
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>Old MacDonald Had a Farm</h3>
+                        <span class="rhyme-lang">English</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            Old MacDonald had a farm, E-I-E-I-O<br>
+                            And on that farm he had a cow, E-I-E-I-O<br>
+                            With a moo-moo here and a moo-moo there<br>
+                            Here a moo, there a moo, everywhere a moo-moo
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="mcdonald">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="mcdonald-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="mcdonald-current">0:00</span>
+                                <span id="mcdonald-duration">1:25</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="mcdonald-status">Ready to play!</div>
+                    </div>
+                </div>
+
+                                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>Baa Baa Black Sheep</h3>
+                        <span class="rhyme-lang">English</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            Baa baa black sheep, have you any wool?<br>
+                            Yes sir, yes sir, three bags full!<br>
+                            One for my master, one for my dame,<br>
+                            And one for the little boy who lives down the lane.
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="baabaa">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="baabaa-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="baabaa-current">0:00</span>
+                                <span id="baabaa-duration">1:20</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="baabaa-status">Ready to play!</div>
+                    </div>
+                </div>
+
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>Wheels on the Bus</h3>
+                        <span class="rhyme-lang">English</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            The wheels on the bus go round and round,<br>
+                            Round and round, round and round.<br>
+                            The wheels on the bus go round and round,<br>
+                            All through the town!
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="wheels">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="wheels-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="wheels-current">0:00</span>
+                                <span id="wheels-duration">1:45</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="wheels-status">Ready to play!</div>
+                    </div>
+                </div>
+
+                <!-- Telugu Rhymes -->
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>చిట్టి చిలకమ్మ</h3>
+                        <span class="rhyme-lang">Telugu</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            చిట్టి చిలకమ్మా - చింతాకుచెట్టు మీదా<br>
+                            చిట్టి చిలకమ్మా - చింతాకుచెట్టు మీదా<br>
+                            కావలి కాస్తావా - కన్నెపిల్లా తీసుకొస్తావా
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="chitti">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="chitti-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="chitti-current">0:00</span>
+                                <span id="chitti-duration">1:35</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="chitti-status">Ready to play!</div>
+                    </div>
+                </div>
+
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>ఊయెల ఊయెల</h3>
+                        <span class="rhyme-lang">Telugu</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            ఊయెల ఊయెల ఊయేలమ్మ<br>
+                            ఊయేలమ్మకు పువ్వులమ్మ<br>
+                            పువ్వులమ్మకు పూలహారం<br>
+                            పూలహారానికి మంగలయ్య
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="uyyala">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="uyyala-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="uyyala-current">0:00</span>
+                                <span id="uyyala-duration">1:40</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="uyyala-status">Ready to play!</div>
+                    </div>
+                </div>
+
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>చందమామ</h3>
+                        <span class="rhyme-lang">Telugu</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            చందమామ చందమామ రావయ్య<br>
+                            నీకు మామిడి పండు ఇస్తాను<br>
+                            తిన్న తర్వాత నీకు నీడ ఇస్తాను<br>
+                            నీడలో కూర్చుని కథ చెప్పు
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="chandamam">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="chandamam-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="chandamam-current">0:00</span>
+                                <span id="chandamam-duration">1:30</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="chandamam-status">Ready to play!</div>
+                    </div>
+                </div>
+
+                <div class="rhyme-card">
+                    <div class="rhyme-header">
+                        <h3>వాన వాన</h3>
+                        <span class="rhyme-lang">Telugu</span>
+                    </div>
+                    <div class="rhyme-content">
+                        <div class="rhyme-text">
+                            వాన వాన వారిదాలు<br>
+                            పాడుతూ వస్తాయి పావురాలు<br>
+                            ఊరేగింపు లాగా వస్తాయి<br>
+                            చిన్ని చిన్ని తుమ్మెదలు
+                        </div>
+                        <div class="rhyme-controls">
+                            <button class="play-btn bounce" data-audio="vaanavaan">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="audio-progress">
+                                <div class="audio-progress-bar" id="vaanavaan-progress"></div>
+                            </div>
+                            <div class="audio-time">
+                                <span id="vaanavaan-current">0:00</span>
+                                <span id="vaanavaan-duration">1:25</span>
+                            </div>
+                        </div>
+                        <div class="rhyme-status" id="vaanavaan-status">Ready to play!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Section -->
+    <section id="auth" class="auth-section">
+        <div class="container">
+            <h2>Join Our Learning Family</h2>
+            <div class="auth-container">
+                <div class="auth-form">
+                    <h3>Create Account</h3>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Start Learning Journey</button>
+                    </form>
+                </div>
+                
+                <div class="auth-form">
+                    <h3>Welcome Back!</h3>
+                    <form id="signin-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-control" placeholder="Your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Your password" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Continue Adventure</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 30px; opacity: 0.9;">We'd love to hear from you! Reach out for questions, feedback, or just to say hello.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mounika Tanguturi</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>nochhavatanguturi@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>8464093095</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fas fa-star"></i>
+                Learn & Play Fun
+            </div>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#rhymes">Rhymes</a></li>
+                <li><a href="#auth">Sign Up/In</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="copyright">
+                &copy; 2023 Learn & Play Fun. Making learning magical for every child.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Game Modal -->
+    <div class="modal" id="game-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2 id="modal-title">Play Game</h2>
+            
+            <div class="game-selection">
+                <button class="game-type-btn active" data-type="numbers">Numbers</button>
+                <button class="game-type-btn" data-type="words">Words</button>
+                <button class="game-type-btn" data-type="memory">Memory</button>
+                <button class="game-type-btn" data-type="puzzle">Puzzle</button>
+                <button class="game-type-btn" data-type="quiz">Quiz</button>
+                <button class="game-type-btn" data-type="wordsearch">Word Search</button>
+            </div>
+            
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="english">English</button>
+                <button class="lang-btn" data-lang="telugu">Telugu</button>
+            </div>
+            
+            <div id="game-container">
+                <!-- Game content will be loaded here -->
+            </div>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <div class="stat-value" id="score">0</div>
+                    <div class="stat-label">Score</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="correct">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="attempts">0</div>
+                    <div class="stat-label">Attempts</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" id="next-question">Next Level</button>
+                <button class="btn btn-accent" id="reset-game" style="margin-left: 10px;">Reset Game</button>
+                <button class="btn" id="close-game" style="margin-left: 10px; background: linear-gradient(45deg, #6c757d, #868e96);">Close Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Game Data
+        const gameData = {
+            numbers: {
+                english: {
+                    1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five',
+                    6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten'
+                },
+                telugu: {
+                    1: 'ఒకటి', 2: 'రెండు', 3: 'మూడు', 4: 'నాలుగు', 5: 'ఐదు',
+                    6: 'ఆరు', 7: 'ఏడు', 8: 'ఎనిమిది', 9: 'తొమ్మిది', 10: 'పది'
+                }
+            },
+            words: {
+                english: {
+                    'CAT': '🐱',
+                    'DOG': '🐶',
+                    'SUN': '☀️',
+                    'BALL': '⚽',
+                    'FISH': '🐠',
+                    'BOOK': '📚',
+                    'TREE': '🌳',
+                    'STAR': '⭐',
+                    'MOON': '🌙',
+                    'CAKE': '🍰'
+                },
+                telugu: {
+                    'నీరు': '💧',
+                    'పక్షి': '🐦',
+                    'చెట్టు': '🌳',
+                    'పుస్తకం': '📚',
+                    'బంతి': '⚽',
+                    'పాలు': '🥛',
+                    'ఇల్లు': '🏠',
+                    'చంద్రుడు': '🌙',
+                    'సూర్యుడు': '☀️',
+                    'పువ్వు': '🌺'
+                }
+            },
+            memory: {
+                english: ['A', 'B', 'C', 'D', '1', '2', '3', '4'],
+                telugu: ['అ', 'ఆ', 'ఇ', 'ఈ', '1', '2', '3', '4']
+            },
+            quiz: {
+                english: [
+                    {
+                        question: "Which animal says 'Meow'?",
+                        options: ["Dog", "Cat", "Cow", "Lion"],
+                        answer: "Cat"
+                    },
+                    {
+                        question: "What do we use to write?",
+                        options: ["Book", "Pencil", "Ball", "Apple"],
+                        answer: "Pencil"
+                    },
+                    {
+                        question: "How many days are in a week?",
+                        options: ["5", "6", "7", "8"],
+                        answer: "7"
+                    }
+                ],
+                telugu: [
+                    {
+                        question: "ఏ జంతువు 'మ్యావ్' అని అంటుంది?",
+                        options: ["కుక్క", "పిల్లి", "ఆవు", "సింహం"],
+                        answer: "పిల్లి"
+                    },
+                    {
+                        question: "మనం ఏది వ్రాయడానికి ఉపయోగిస్తాము?",
+                        options: ["పుస్తకం", "పెన్సిల్", "బంతి", "ఆపిల్"],
+                        answer: "పెన్సిల్"
+                    },
+                    {
+                        question: "వారంలో ఎన్ని రోజులు ఉన్నాయి?",
+                        options: ["5", "6", "7", "8"],
+                        answer: "7"
+                    }
+                ]
+            },
+            wordsearch: {
+                english: {
+                    grid: [
+                        ['C', 'A', 'T', 'D', 'O', 'G'],
+                        ['S', 'U', 'N', 'B', 'A', 'L'],
+                        ['F', 'I', 'S', 'H', 'L', 'L'],
+                        ['B', 'O', 'O', 'K', 'T', 'R'],
+                        ['T', 'R', 'E', 'E', 'E', 'E'],
+                        ['S', 'T', 'A', 'R', 'M', 'N']
+                    ],
+                    words: ['CAT', 'DOG', 'SUN', 'FISH', 'BOOK', 'TREE', 'STAR']
+                },
+                telugu: {
+                    grid: [
+                        ['న', 'ీ', 'ర', 'ు', 'ప', 'క'],
+                        ['ప', 'క', '్ష', 'ి', 'చ', 'ె'],
+                        ['చ', 'ె', 'ట', '్', 'ట', 'ు'],
+                        ['ప', 'ు', 'స', '్', 'త', 'క'],
+                        ['బ', 'ం', 'త', 'ి', 'ప', 'ు'],
+                        ['ఇ', 'ల', '్', 'ల', 'ు', 'స']
+                    ],
+                    words: ['నీరు', 'పక్షి', 'చెట్టు', 'పుస్తకం', 'బంతి', 'ఇల్లు']
+                }
+            }
+        };
+
+        // Game State
+        let currentGame = 'numbers';
+        let currentLanguage = 'english';
+        let currentGameType = 'numbers';
+        let score = 0;
+        let correctAnswers = 0;
+        let totalAttempts = 0;
+        let currentQuestion = null;
+        let currentAudio = null;
+        let audioUpdateInterval = null;
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game Card Click Handlers
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    currentGame = this.getAttribute('data-game');
+                    document.getElementById('modal-title').textContent = `${currentGame.charAt(0).toUpperCase() + currentGame.slice(1)} Games`;
+                    openGameModal();
+                });
+            });
+
+            // Game Type Selection
+            document.querySelectorAll('.game-type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.game-type-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentGameType = this.getAttribute('data-type');
+                    loadGame();
+                });
+            });
+
+            // Language Selection
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentLanguage = this.getAttribute('data-lang');
+                    loadGame();
+                });
+            });
+
+            // Game Controls
+            document.getElementById('next-question').addEventListener('click', loadGame);
+            document.getElementById('reset-game').addEventListener('click', resetGame);
+            document.getElementById('close-game').addEventListener('click', closeGameModal);
+
+            // Modal Controls
+            document.querySelector('.close-modal').addEventListener('click', closeGameModal);
+            
+            // Fix for modal background click
+            document.getElementById('game-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeGameModal();
+                }
+            });
+
+            // Enhanced Rhymes Play Buttons with Text-to-Speech
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const audioType = this.getAttribute('data-audio');
+                    playRhymeWithTTS(audioType, this);
+                });
+            });
+
+            // Form submissions
+            document.getElementById('signup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('🎉 Welcome to Learn & Play Fun! Your learning adventure begins now!');
+                this.reset();
+            });
+            
+            document.getElementById('signin-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('🌟 Welcome back! Ready to continue your learning journey?');
+                this.reset();
+            });
+
+            // Initialize rhymes with text-to-speech
+            initializeRhymes();
+        });
+
+        // Enhanced Rhymes with Text-to-Speech
+        function initializeRhymes() {
+            console.log('Rhymes initialized with Text-to-Speech support');
+        }
+
+        function playRhymeWithTTS(audioType, button) {
+            const statusElement = document.getElementById(`${audioType}-status`);
+            const progressBar = document.getElementById(`${audioType}-progress`);
+            const currentTimeElement = document.getElementById(`${audioType}-current`);
+            
+            // Get rhyme text
+            const rhymeCard = button.closest('.rhyme-card');
+            const rhymeText = rhymeCard.querySelector('.rhyme-text').textContent;
+            
+            // Stop any currently playing audio
+            stopAllAudio();
+            
+            if (button.classList.contains('playing')) {
+                // If already playing, pause it
+                stopSpeech();
+                button.innerHTML = '<i class="fas fa-play"></i>';
+                button.classList.remove('playing');
+                statusElement.textContent = 'Paused';
+                stopAudioProgressUpdate();
+            } else {
+                // Start playing
+                button.innerHTML = '<i class="fas fa-pause"></i>';
+                button.classList.add('playing');
+                statusElement.textContent = 'Playing...';
+                
+                // Start progress animation
+                simulateAudioProgress(audioType, 90);
+                
+                // Use text-to-speech
+                speakText(rhymeText, audioType, statusElement);
+            }
+        }
+
+        function speakText(text, audioType, statusElement) {
+            if ('speechSynthesis' in window) {
+                // Stop any ongoing speech
+                speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Set voice properties based on language
+                const language = getLanguageFromAudioType(audioType);
+                utterance.lang = language === 'telugu' ? 'te-IN' : 'en-US';
+                
+                utterance.rate = 0.8;
+                utterance.pitch = 1.2;
+                utterance.volume = 1;
+                
+                utterance.onstart = function() {
+                    statusElement.textContent = 'Playing...';
+                };
+                
+                utterance.onend = function() {
+                    statusElement.textContent = 'Finished playing';
+                    resetPlayButton(audioType);
+                    resetAudioProgress(audioType);
+                };
+                
+                utterance.onerror = function(event) {
+                    console.error('Speech synthesis error:', event);
+                    statusElement.textContent = 'Playback completed';
+                    resetPlayButton(audioType);
+                    resetAudioProgress(audioType);
+                };
+                
+                speechSynthesis.speak(utterance);
+            } else {
+                statusElement.textContent = 'Audio playback not supported';
+                resetPlayButton(audioType);
+            }
+        }
+
+        function getLanguageFromAudioType(audioType) {
+            const rhymeCard = document.querySelector(`[data-audio="${audioType}"]`).closest('.rhyme-card');
+            const langElement = rhymeCard.querySelector('.rhyme-lang');
+            return langElement.textContent.toLowerCase();
+        }
+
+        function stopSpeech() {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        function simulateAudioProgress(audioType, duration) {
+            let progress = 0;
+            const progressBar = document.getElementById(`${audioType}-progress`);
+            const currentTimeElement = document.getElementById(`${audioType}-current`);
+            
+            stopAudioProgressUpdate();
+            
+            audioUpdateInterval = setInterval(() => {
+                progress += (100 / (duration * 10));
+                if (progress <= 100) {
+                    progressBar.style.width = `${progress}%`;
+                    currentTimeElement.textContent = formatTime((progress / 100) * duration);
+                } else {
+                    stopAudioProgressUpdate();
+                }
+            }, 100);
+        }
+
+        function stopAudioProgressUpdate() {
+            if (audioUpdateInterval) {
+                clearInterval(audioUpdateInterval);
+                audioUpdateInterval = null;
+            }
+        }
+
+        function resetAudioProgress(audioType) {
+            const progressBar = document.getElementById(`${audioType}-progress`);
+            const currentTimeElement = document.getElementById(`${audioType}-current`);
+            
+            if (progressBar) progressBar.style.width = '0%';
+            if (currentTimeElement) currentTimeElement.textContent = '0:00';
+        }
+
+        function resetPlayButton(audioType) {
+            const button = document.querySelector(`[data-audio="${audioType}"]`);
+            if (button) {
+                button.innerHTML = '<i class="fas fa-play"></i>';
+                button.classList.remove('playing');
+            }
+        }
+
+        function stopAllAudio() {
+            // Stop all text-to-speech
+            stopSpeech();
+            
+            // Reset all play buttons
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+                btn.classList.remove('playing');
+            });
+            
+            // Reset all status messages
+            document.querySelectorAll('.rhyme-status').forEach(status => {
+                if (!status.textContent.includes('Ready')) {
+                    status.textContent = 'Ready to play!';
+                }
+            });
+            
+            // Reset all progress bars
+            document.querySelectorAll('.audio-progress-bar').forEach(progress => {
+                progress.style.width = '0%';
+            });
+            
+            // Reset time displays
+            document.querySelectorAll('.audio-time span:first-child').forEach(time => {
+                time.textContent = '0:00';
+            });
+            
+            stopAudioProgressUpdate();
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Game Functions
+        function openGameModal() {
+            document.getElementById('game-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            resetGame();
+            loadGame();
+        }
+
+        function closeGameModal() {
+            document.getElementById('game-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            stopAllAudio();
+        }
+
+        function resetGame() {
+            score = 0;
+            correctAnswers = 0;
+            totalAttempts = 0;
+            memoryCards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            updateStats();
+            loadGame();
+        }
+
+        function loadGame() {
+            const gameContainer = document.getElementById('game-container');
+            gameContainer.innerHTML = '';
+
+            switch(currentGameType) {
+                case 'numbers':
+                    loadNumberGame();
+                    break;
+                case 'words':
+                    loadWordGame();
+                    break;
+                case 'memory':
+                    loadMemoryGame();
+                    break;
+                case 'puzzle':
+                    loadPuzzleGame();
+                    break;
+                case 'quiz':
+                    loadQuizGame();
+                    break;
+                case 'wordsearch':
+                    loadWordSearchGame();
+                    break;
+            }
+        }
+
+        function loadNumberGame() {
+            const gameContainer = document.getElementById('game-container');
+            const numbers = Object.keys(gameData.numbers[currentLanguage]);
+            const randomIndex = Math.floor(Math.random() * numbers.length);
+            const correctNumber = numbers[randomIndex];
+            
+            gameContainer.innerHTML = `
+                <div class="number-game">
+                    <div class="number-display">${correctNumber}</div>
+                    <p>Select the correct number name:</p>
+                    <div class="number-options" id="number-options"></div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+
+            const correctAnswer = gameData.numbers[currentLanguage][correctNumber];
+            const options = [correctAnswer];
+            const incorrectNumbers = numbers.filter(n => n !== correctNumber);
+            
+            for (let i = 0; i < 3; i++) {
+                const randomIndex = Math.floor(Math.random() * incorrectNumbers.length);
+                const randomNumber = incorrectNumbers[randomIndex];
+                options.push(gameData.numbers[currentLanguage][randomNumber]);
+                incorrectNumbers.splice(randomIndex, 1);
+            }
+            
+            shuffleArray(options);
+            
+            const optionsContainer = document.getElementById('number-options');
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'number-option bounce';
+                button.textContent = option;
+                button.addEventListener('click', function() {
+                    checkAnswer(option === correctAnswer, correctAnswer);
+                });
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function loadWordGame() {
+            const gameContainer = document.getElementById('game-container');
+            const words = Object.keys(gameData.words[currentLanguage]);
+            const randomIndex = Math.floor(Math.random() * words.length);
+            const correctWord = words[randomIndex];
+            const wordEmoji = gameData.words[currentLanguage][correctWord];
+            
+            gameContainer.innerHTML = `
+                <div class="word-game">
+                    <div class="word-image">${wordEmoji}</div>
+                    <p>Select the correct word:</p>
+                    <div class="word-options" id="word-options"></div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+
+            const options = [correctWord];
+            const incorrectWords = words.filter(w => w !== correctWord);
+            
+            for (let i = 0; i < 3; i++) {
+                const randomIndex = Math.floor(Math.random() * incorrectWords.length);
+                options.push(incorrectWords[randomIndex]);
+                incorrectWords.splice(randomIndex, 1);
+            }
+            
+            shuffleArray(options);
+            
+            const optionsContainer = document.getElementById('word-options');
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'word-option bounce';
+                button.textContent = option;
+                button.addEventListener('click', function() {
+                    checkAnswer(option === correctWord, correctWord);
+                });
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function loadMemoryGame() {
+            const gameContainer = document.getElementById('game-container');
+            const cards = [...gameData.memory[currentLanguage], ...gameData.memory[currentLanguage]];
+            shuffleArray(cards);
+            
+            gameContainer.innerHTML = `
+                <div class="memory-game" id="memory-game"></div>
+                <div class="feedback" id="feedback" style="text-align: center; margin-top: 20px;"></div>
+            `;
+
+            const memoryContainer = document.getElementById('memory-game');
+            memoryCards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+
+            cards.forEach((card, index) => {
+                const memoryCard = document.createElement('div');
+                memoryCard.className = 'memory-card';
+                memoryCard.dataset.value = card;
+                memoryCard.dataset.index = index;
+                memoryCard.textContent = '?';
+                
+                memoryCard.addEventListener('click', flipCard);
+                memoryContainer.appendChild(memoryCard);
+                memoryCards.push(memoryCard);
+            });
+        }
+
+        function flipCard() {
+            if (this.classList.contains('flipped') || this.classList.contains('matched') || flippedCards.length >= 2) {
+                return;
+            }
+
+            this.classList.add('flipped');
+            this.textContent = this.dataset.value;
+            flippedCards.push(this);
+
+            if (flippedCards.length === 2) {
+                setTimeout(checkMemoryMatch, 500);
+            }
+        }
+
+        function checkMemoryMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.dataset.value === card2.dataset.value) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                score += 20;
+                correctAnswers++;
+                updateStats();
+                
+                if (matchedPairs === gameData.memory[currentLanguage].length) {
+                    document.getElementById('feedback').textContent = '🎉 Congratulations! You matched all pairs!';
+                    showNotification('🌟 Memory Master! You completed the memory game!');
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.textContent = '?';
+                card2.textContent = '?';
+            }
+            
+            flippedCards = [];
+            totalAttempts++;
+            updateStats();
+        }
+
+        function loadQuizGame() {
+            const gameContainer = document.getElementById('game-container');
+            const quizzes = gameData.quiz[currentLanguage];
+            const randomIndex = Math.floor(Math.random() * quizzes.length);
+            const quiz = quizzes[randomIndex];
+            
+            gameContainer.innerHTML = `
+                <div class="quiz-game">
+                    <div class="quiz-question">${quiz.question}</div>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            quiz.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'quiz-option bounce';
+                button.textContent = option;
+                button.addEventListener('click', function() {
+                    checkAnswer(option === quiz.answer, quiz.answer);
+                });
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function loadWordSearchGame() {
+            const gameContainer = document.getElementById('game-container');
+            const wordSearchData = gameData.wordsearch[currentLanguage];
+            
+            gameContainer.innerHTML = `
+                <div class="word-search-game">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Find the hidden words!</h3>
+                    <div class="word-search" id="word-search"></div>
+                    <div class="feedback" id="feedback" style="text-align: center; margin-top: 20px;"></div>
+                </div>
+            `;
+
+            const wordSearchContainer = document.getElementById('word-search');
+            wordSearchData.grid.forEach(row => {
+                row.forEach(cell => {
+                    const cellElement = document.createElement('div');
+                    cellElement.className = 'word-search-cell';
+                    cellElement.textContent = cell;
+                    wordSearchContainer.appendChild(cellElement);
+                });
+            });
+        }
+
+        function checkAnswer(isCorrect, correctAnswer) {
+            const feedback = document.getElementById('feedback');
+            totalAttempts++;
+            
+            if (isCorrect) {
+                feedback.textContent = '🎉 Correct! Excellent work!';
+                feedback.className = 'feedback correct';
+                score += 10;
+                correctAnswers++;
+                showNotification('🌟 Great job! You earned 10 points!');
+            } else {
+                feedback.textContent = `💡 Almost! The correct answer is: ${correctAnswer}`;
+                feedback.className = 'feedback incorrect';
+                score = Math.max(0, score - 2);
+            }
+            
+            updateStats();
+            
+            // Disable options for non-memory games
+            if (currentGameType !== 'memory') {
+                disableOptions();
+            }
+        }
+
+        function disableOptions() {
+            const options = document.querySelectorAll('.number-option, .word-option, .quiz-option');
+            options.forEach(option => {
+                                option.disabled = true;
+                option.style.opacity = '0.6';
+                option.style.transform = 'scale(0.95)';
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct').textContent = correctAnswers;
+            document.getElementById('attempts').textContent = totalAttempts;
+        }
+
+        function showNotification(message) {
+            // Create a simple notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(45deg, var(--success), var(--kid-green));
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                z-index: 3000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Utility function to shuffle array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+               

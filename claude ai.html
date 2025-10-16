@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.3s;
+        }
+
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .edit-btn {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stat-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .stat-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 Volunteer Management System 🌟</h1>
+            <p>Connecting Hearts, Building Communities</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-btn" onclick="showTab('register')">➕ Register</button>
+            <button class="tab-btn" onclick="showTab('volunteers')">👥 Volunteers</button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <h2 style="margin-bottom: 20px; color: #333;">Dashboard Overview</h2>
+            <div class="stats-container">
+                <div class="stat-card stat-1">
+                    <h3 id="totalVolunteers">0</h3>
+                    <p>Total Volunteers</p>
+                </div>
+                <div class="stat-card stat-2">
+                    <h3 id="activeVolunteers">0</h3>
+                    <p>Active Volunteers</p>
+                </div>
+                <div class="stat-card stat-3">
+                    <h3 id="pendingVolunteers">0</h3>
+                    <p>Pending Applications</p>
+                </div>
+                <div class="stat-card stat-4">
+                    <h3 id="inactiveVolunteers">0</h3>
+                    <p>Inactive Volunteers</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Tab -->
+        <div id="register" class="tab-content">
+            <h2 style="margin-bottom: 20px; color: #333;">Register New Volunteer</h2>
+            <div id="registerAlert"></div>
+            <form id="volunteerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name *</label>
+                        <input type="text" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name *</label>
+                        <input type="text" name="last_name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" name="phone">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" name="date_of_birth">
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" name="city">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" name="address">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" name="state">
+                    </div>
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input type="text" name="zip_code">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills</label>
+                    <textarea name="skills" placeholder="e.g., Teaching, Event Planning, Fundraising"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Availability</label>
+                        <select name="availability">
+                            <option value="">Select Availability</option>
+                            <option value="Weekdays">Weekdays</option>
+                            <option value="Weekends">Weekends</option>
+                            <option value="Evenings">Evenings</option>
+                            <option value="Flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status">
+                            <option value="Pending">Pending</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Emergency Contact Name</label>
+                        <input type="text" name="emergency_contact_name">
+                    </div>
+                    <div class="form-group">
+                        <label>Emergency Contact Phone</label>
+                        <input type="tel" name="emergency_contact_phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea name="notes" placeholder="Additional information"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">✨ Register Volunteer</button>
+            </form>
+        </div>
+
+        <!-- Volunteers List Tab -->
+        <div id="volunteers" class="tab-content">
+            <h2 style="margin-bottom: 20px; color: #333;">Volunteer List</h2>
+            <div id="volunteerAlert"></div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Skills</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="volunteerTableBody">
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 30px;">
+                                Loading volunteers...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulated data storage (replace with actual PHP/MySQL backend)
+        let volunteers = [
+            {
+                volunteer_id: 1,
+                first_name: 'John',
+                last_name: 'Doe',
+                email: 'john.doe@email.com',
+                phone: '555-0101',
+                city: 'New York',
+                skills: 'Teaching, Mentoring',
+                availability: 'Weekends',
+                status: 'Active'
+            },
+            {
+                volunteer_id: 2,
+                first_name: 'Jane',
+                last_name: 'Smith',
+                email: 'jane.smith@email.com',
+                phone: '555-0102',
+                city: 'Los Angeles',
+                skills: 'Event Planning, Fundraising',
+                availability: 'Evenings',
+                status: 'Active'
+            },
+            {
+                volunteer_id: 3,
+                first_name: 'Mike',
+                last_name: 'Johnson',
+                email: 'mike.j@email.com',
+                phone: '555-0103',
+                city: 'Chicago',
+                skills: 'Construction, Carpentry',
+                availability: 'Flexible',
+                status: 'Pending'
+            }
+        ];
+
+        // Tab switching
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabName === 'dashboard') {
+                updateDashboard();
+            } else if (tabName === 'volunteers') {
+                loadVolunteers();
+            }
+        }
+
+        // Update dashboard statistics
+        function updateDashboard() {
+            const total = volunteers.length;
+            const active = volunteers.filter(v => v.status === 'Active').length;
+            const pending = volunteers.filter(v => v.status === 'Pending').length;
+            const inactive = volunteers.filter(v => v.status === 'Inactive').length;
+            
+            document.getElementById('totalVolunteers').textContent = total;
+            document.getElementById('activeVolunteers').textContent = active;
+            document.getElementById('pendingVolunteers').textContent = pending;
+            document.getElementById('inactiveVolunteers').textContent = inactive;
+        }
+
+        // Load volunteers into table
+        function loadVolunteers() {
+            const tbody = document.getElementById('volunteerTableBody');
+            
+            if (volunteers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 30px;">No volunteers found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = volunteers.map(v => `
+                <tr>
+                    <td>${v.volunteer_id}</td>
+                    <td>${v.first_name} ${v.last_name}</td>
+                    <td>${v.email}</td>
+                    <td>${v.phone || 'N/A'}</td>
+                    <td>${v.city || 'N/A'}</td>
+                    <td>${v.skills || 'N/A'}</td>
+                    <td><span class="status-badge status-${v.status.toLowerCase()}">${v.status}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="action-btn edit-btn" onclick="editVolunteer(${v.volunteer_id})">Edit</button>
+                            <button class="action-btn delete-btn" onclick="deleteVolunteer(${v.volunteer_id})">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Handle form submission
+        document.getElementById('volunteerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const newVolunteer = {
+                volunteer_id: volunteers.length + 1,
+                first_name: formData.get('first_name'),
+                last_name: formData.get('last_name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                date_of_birth: formData.get('date_of_birth'),
+                address: formData.get('address'),
+                city: formData.get('city'),
+                state: formData.get('state'),
+                zip_code: formData.get('zip_code'),
+                skills: formData.get('skills'),
+                availability: formData.get('availability'),
+                status: formData.get('status'),
+                emergency_contact_name: formData.get('emergency_contact_name'),
+                emergency_contact_phone: formData.get('emergency_contact_phone'),
+                notes: formData.get('notes')
+            };
+            
+            volunteers.push(newVolunteer);
+            
+            showAlert('registerAlert', 'Volunteer registered successfully! 🎉', 'success');
+            this.reset();
+            updateDashboard();
+        });
+
+        // Delete volunteer
+        function deleteVolunteer(id) {
+            if (confirm('Are you sure you want to delete this volunteer?')) {
+                volunteers = volunteers.filter(v => v.volunteer_id !== id);
+                loadVolunteers();
+                updateDashboard();
+                showAlert('volunteerAlert', 'Volunteer deleted successfully!', 'success');
+            }
+        }
+
+        // Edit volunteer (simplified)
+        function editVolunteer(id) {
+            alert('Edit functionality would open a form to modify volunteer #' + id);
+        }
+
+        // Show alert message
+        function showAlert(elementId, message, type) {
+            const alertDiv = document.getElementById(elementId);
+            alertDiv.innerHTML = <div class="alert alert-${type}">${message}</div>;
+            setTimeout(() => {
+                alertDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        // Initialize
+        updateDashboard();
+        loadVolunteers();
+    </script>
+</body>
+</html>
